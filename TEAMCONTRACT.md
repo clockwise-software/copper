@@ -23,19 +23,19 @@ This document stands in addition to the [team code of conduct](https://www.dropb
 - Present features and progress in weekly Saturday meetings
 - Update relevant issues as you perform work
 
-###Drew:
+### Drew:
 - Backend (Python, SQL)
 
-###Isaac:
+### Isaac:
 - Frontend
 
-###Marc:
+### Marc:
 - Backend
 
-###Andey:
+### Andey:
 - Wherever (inc. SQL)
 
-###John:
+### John:
 - Frontend
 
 ## Member Evaluation
