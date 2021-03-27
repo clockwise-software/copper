@@ -23,6 +23,21 @@ This document stands in addition to the [team code of conduct](https://www.dropb
 - Present features and progress in weekly Saturday meetings
 - Update relevant issues as you perform work
 
+### Drew:
+- Backend (Python, SQL)
+
+### Isaac:
+- Frontend
+
+### Marc:
+- Backend
+
+### Andey:
+- Wherever (inc. SQL)
+
+### John:
+- Frontend
+
 ## Member Evaluation
 
 - Participation in the slack text syncs each week (total n=4)

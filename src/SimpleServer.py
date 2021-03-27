@@ -6,7 +6,7 @@ import os
 from flask import Flask, redirect, request, render_template
 import sqlite3
 
-DATABASE = 'bootcamp.db'
+DATABASE = 'bootcamp_copy.db' # Change when fixed.
 
 app = Flask(__name__)
 
@@ -19,16 +19,19 @@ def studentAddDetails():
 	if request.method =='GET':
 		return render_template('EmployeeData.html')
 	if request.method =='POST':
+		email = request.form.get('email', default='Error') # Added email request.
 		firstName = request.form.get('firstName', default="Error") 
 		lastName = request.form.get('lastName', default="Error")
 		businessunit = request.form.get('bu', default="Error")
 		state = request.form.get('state', default="Error")
+		city = request.form.get('city', default="Error") # Added city request.
+		rl = request.form.get('rl', default="Error") # Added registered license request.
 		print("inserting employee"+firstName)
 		try:
 			conn = sqlite3.connect(DATABASE)
 			cur = conn.cursor()
-			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'State/Province')\
-						VALUES (?,?,?,?)",(firstName, lastName, businessunit, state ) )
+			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'State/Province', 'City', 'Registered Licenses')\
+						VALUES (?,?,?,?,?,?,?)",(email, firstName, lastName, businessunit, state, city, rl ) ) # Updated variables to include email city and rl.
 
 			conn.commit()
 			msg = "Record successfully added"
@@ -38,6 +41,46 @@ def studentAddDetails():
 		finally:
 			conn.close()
 			return msg
+@app.route("/Employee/Edit", methods = ['GET','UPDATE']) # Added employee edit function.
+def studentEditDetails():
+    if request.method =='GET':
+        return render_template('EmployeeEdit.html') # Added EmployeeEdit.html
+    if request.method =='UPDATE':
+        try:
+            email = request.form.get('email', default='Error')
+            newFirstName = request.form.get('firstName', default="Error") 
+            newLastName = request.form.get('lastName', default="Error")
+            newBusinessunit = request.form.get('bu', default="Error")
+            newState = request.form.get('state', default="Error")
+            newCity = request.form.get('city', default="Error")
+            newRl = request.form.get('rl', default="Error")
+            conn = sqlite3.connect(DATABASE)
+            cur = conn.cursor()
+            cur.execute("UPDATE 'EmployeeList' SET firstName = newFirstName, lastName = newLastName, buisinessunit = newBuisinessunit, state = newState, city = newCity, rl = newRl WHERE email=?", [email])
+            print("Inserting employee update for:"+newFirstName)
+        except:
+            conn.rollback()
+            msg = "error in update operation"
+        finally:
+            conn.close()
+        return msg
+@app.route("/Employee/Delete", methods = ['GET','DELETE'])
+def studentDeleteDetails():
+    if request.method == 'GET':
+        return render_template('EmployeeDelete.html') # Added EmployeeDelete.html
+    if request.method =='DELETE':
+        try:
+            email = request.form.get('email', default='Error')
+            conn = sqlite3.connect(DATABASE)
+            cur = conn.cursor()
+            cur.execute("DELETE FROM 'EmployeeList' WHERE email=?", [email])
+            print("Deleting employee data for:"+email)
+        except:
+            conn.rollback()
+            msg = "error in delete operation"
+        finally:
+            conn.close()
+        return msg
 
 @app.route("/Employee/Search", methods = ['GET','POST'])
 def surnameSearch():
