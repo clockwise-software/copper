@@ -23,12 +23,14 @@ def studentAddDetails():
 		lastName = request.form.get('lastName', default="Error")
 		businessunit = request.form.get('bu', default="Error")
 		state = request.form.get('state', default="Error")
+		city = request.form.get('city', default="Error") # Added city box.
+		rl = request.form.get('rl', default="Error") # Added registered license box.
 		print("inserting employee"+firstName)
 		try:
 			conn = sqlite3.connect(DATABASE)
 			cur = conn.cursor()
 			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'State/Province')\
-						VALUES (?,?,?,?)",(firstName, lastName, businessunit, state ) )
+						VALUES (?,?,?,?)",(firstName, lastName, businessunit, state, city, rl ) ) # Updated variables to include city and rl.
 
 			conn.commit()
 			msg = "Record successfully added"
