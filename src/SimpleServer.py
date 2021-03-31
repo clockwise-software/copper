@@ -6,7 +6,7 @@ import os
 from flask import Flask, redirect, request, render_template
 import sqlite3
 
-DATABASE = 'bootcamp.db'
+DATABASE = 'bootcamp_copy.db' # Change when fixed.
 
 app = Flask(__name__)
 
@@ -30,8 +30,8 @@ def studentAddDetails():
 		try:
 			conn = sqlite3.connect(DATABASE)
 			cur = conn.cursor()
-			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'State/Province')\
-						VALUES (?,?,?,?)",(email, firstName, lastName, businessunit, state, city, rl ) ) # Updated variables to include email city and rl.
+			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'State/Province', 'City', 'Registered Licenses')\
+						VALUES (?,?,?,?,?,?,?)",(email, firstName, lastName, businessunit, state, city, rl ) ) # Updated variables to include email city and rl.
 
 			conn.commit()
 			msg = "Record successfully added"
@@ -41,6 +41,29 @@ def studentAddDetails():
 		finally:
 			conn.close()
 			return msg
+@approute("/Employee/Edit", methods = ['GET','UPDATE']) # Added employee edit function.
+def studentEditDetails():
+    if request.method =='GET':
+		return render_template('EmployeeEdit.html') # Added EmployeeEdit.html
+    if request.method =='UPDATE':
+        try:
+            email = request.form.get('email', default='Error')
+            firstName = request.form.get('firstName', default="Error") 
+            lastName = request.form.get('lastName', default="Error")
+            businessunit = request.form.get('bu', default="Error")
+            state = request.form.get('state', default="Error")
+            city = request.form.get('city', default="Error")
+            rl = request.form.get('rl', default="Error")
+            conn = sqlite3.connect(DATABASE)
+            cur = conn.cursor()
+            cur.execute("UPDATE 'EmployeeList' WHERE LastName=", [lastName])
+            print("Inserting employee update for:"+firstName)
+        except:
+			conn.rollback()
+			msg = "error in update operation"
+        finally:
+			conn.close()
+        return msg
 
 @app.route("/Employee/Search", methods = ['GET','POST'])
 def surnameSearch():
