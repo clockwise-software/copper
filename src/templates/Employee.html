@@ -2,13 +2,16 @@
 
 
 {%block mainBlock%}
-<h2> Employees</h2>
+<h2>Employees</h2>
 <table border = 1>
    <thead>
       <td>First Name</td>
       <td>Last Name</td>
-      <td>Business Unit</td>
+      <td>City</td>
       <td>State</td>
+      <td>Skill</td>
+      <td>License</td>
+      <td>Business Unit</td>
    </thead>
 
    {% for row in data %}
@@ -17,9 +20,14 @@
       <tr>
         <td>{{row[0]}}</td>
         <td>{{row[1]}}</td>
-        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
         <td>{{row[5]}}</td>
+        <td>{{row[9]}}</td>
+        <td>{{row[8]}}</td>
+        <td>{{row[3]}}</td>
       </tr>
    {% endfor %}
 </table>
+
+
 {%endblock%}
