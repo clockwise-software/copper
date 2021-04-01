@@ -41,7 +41,7 @@ def studentAddDetails():
 		finally:
 			conn.close()
 			return msg
-@app.route("/Employee/Edit", methods = ['GET','UPDATE','DELETE']) # Added employee edit function.
+@app.route("/Employee/Edit", methods = ['GET','UPDATE']) # Added employee edit function.
 def studentEditDetails():
     if request.method =='GET':
         return render_template('EmployeeEdit.html') # Added EmployeeEdit.html
@@ -58,15 +58,26 @@ def studentEditDetails():
             cur = conn.cursor()
             cur.execute("UPDATE 'EmployeeList' SET firstName = newFirstName, lastName = newLastName, buisinessunit = newBuisinessunit, state = newState, city = newCity, rl = newRl WHERE email=?", [email])
             print("Inserting employee update for:"+newFirstName)
-    if request.method == 'DELETE':
+        except:
+            conn.rollback()
+            msg = "error in update operation"
+        finally:
+            conn.close()
+        return msg
+@app.route("/Employee/Delete", methods = ['GET','DELETE'])
+def studentDeleteDetails():
+    if request.method == 'GET':
+        return render_template('EmployeeDelete.html') # Added EmployeeDelete.html
+    if request.method =='DELETE':
         try:
+            email = request.form.get('email', default='Error')
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
             cur.execute("DELETE FROM 'EmployeeList' WHERE email=?", [email])
             print("Deleting employee data for:"+email)
         except:
             conn.rollback()
-            msg = "error in update operation"
+            msg = "error in delete operation"
         finally:
             conn.close()
         return msg
