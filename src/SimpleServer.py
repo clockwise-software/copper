@@ -41,7 +41,7 @@ def studentAddDetails():
 		finally:
 			conn.close()
 			return msg
-@approute("/Employee/Edit", methods = ['GET','UPDATE']) # Added employee edit function.
+@app.route("/Employee/Edit", methods = ['GET','UPDATE']) # Added employee edit function.
 def studentEditDetails():
     if request.method =='GET':
         return render_template('EmployeeEdit.html') # Added EmployeeEdit.html
