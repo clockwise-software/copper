@@ -26,7 +26,7 @@
     var state = document.forms["myForm"]["state"].value;
     var city = document.forms["myForm"]["city"].value;
     var rl = document.forms["myForm"]["rl"].value;
-    params = 'email'+email'&firstName='+firstName+'&lastName='+lastName+'&bu='+businessunit+'&state='+state'&city'+city'&rl'+rl;
+    params = 'email'+email+'&firstName='+firstName+'&lastName='+lastName+'&bu='+businessunit+'&state='+state+'&city'+city+'&rl'+rl;
     var xhttp = new XMLHttpRequest();
     xhttp.open("UPDATE", '/Employee/EditEmployee', true); // true is asynchronous
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
