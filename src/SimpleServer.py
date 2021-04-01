@@ -48,16 +48,16 @@ def studentEditDetails():
     if request.method =='UPDATE':
         try:
             email = request.form.get('email', default='Error')
-            firstName = request.form.get('firstName', default="Error") 
-            lastName = request.form.get('lastName', default="Error")
-            businessunit = request.form.get('bu', default="Error")
-            state = request.form.get('state', default="Error")
-            city = request.form.get('city', default="Error")
-            rl = request.form.get('rl', default="Error")
+            newFirstName = request.form.get('firstName', default="Error") 
+            newLastName = request.form.get('lastName', default="Error")
+            newBusinessunit = request.form.get('bu', default="Error")
+            newState = request.form.get('state', default="Error")
+            newCity = request.form.get('city', default="Error")
+            newRl = request.form.get('rl', default="Error")
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
-            cur.execute("UPDATE 'EmployeeList' WHERE LastName=", [lastName])
-            print("Inserting employee update for:"+firstName)
+            cur.execute("UPDATE 'EmployeeList' SET firstName = newFirstName, lastName = newLastName, buisinessunit = newBuisinessunit, state = newState, city = newCity, rl = newRl WHERE email=", [email])
+            print("Inserting employee update for:"+newFirstName)
         except:
 			conn.rollback()
 			msg = "error in update operation"
