@@ -28,7 +28,7 @@
     var rl = document.forms["myForm"]["rl"].value;
     params = 'email'+email+'&firstName='+firstName+'&lastName='+lastName+'&bu='+businessunit+'&state='+state+'&city'+city+'&rl'+rl;
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", '/Employee/Edit', true); // true is asynchronous
+    xhttp.open("UPDATE", '/Employee/Edit', true); // true is asynchronous
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onload = function() {
       if (xhttp.readyState === 4 && xhttp.status === 200) {
