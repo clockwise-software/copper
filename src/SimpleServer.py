@@ -6,7 +6,7 @@ import os
 from flask import Flask, redirect, request, render_template
 import sqlite3
 
-DATABASE = 'bootcamp_copy.db' # Change when fixed.
+DATABASE = 'bootcamp.db'
 
 app = Flask(__name__)
 
