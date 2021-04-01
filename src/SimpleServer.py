@@ -44,7 +44,7 @@ def studentAddDetails():
 @approute("/Employee/Edit", methods = ['GET','UPDATE']) # Added employee edit function.
 def studentEditDetails():
     if request.method =='GET':
-		return render_template('EmployeeEdit.html') # Added EmployeeEdit.html
+        return render_template('EmployeeEdit.html') # Added EmployeeEdit.html
     if request.method =='UPDATE':
         try:
             email = request.form.get('email', default='Error')
@@ -59,10 +59,10 @@ def studentEditDetails():
             cur.execute("UPDATE 'EmployeeList' SET firstName = newFirstName, lastName = newLastName, buisinessunit = newBuisinessunit, state = newState, city = newCity, rl = newRl WHERE email=?", [email])
             print("Inserting employee update for:"+newFirstName)
         except:
-			conn.rollback()
-			msg = "error in update operation"
+            conn.rollback()
+            msg = "error in update operation"
         finally:
-			conn.close()
+            conn.close()
         return msg
 
 @app.route("/Employee/Search", methods = ['GET','POST'])
