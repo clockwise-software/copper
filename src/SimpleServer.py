@@ -99,29 +99,6 @@ def lastname_autocomplete():
         print('Error in lastnameAutocomplete: Invalid request method.')
 
 
-""" # The name says it...
-@app.route("/Employee/VulnerableSearch", methods = ['GET','POST'])
-def surnameInjectionSearch():
-    if request.method =='GET':
-        return render_template('EmployeeSQLInjection.html')
-    if request.method =='POST':
-        lastName = request.form.get('lastName', default="Error") #rem: args for get form for post
-        conn = sqlite3.connect(DATABASE)
-        cur = conn.cursor()
-
-        # VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD
-        query = "SELECT * FROM EmployeeList WHERE lastname= '%s' " % (lastName,)
-        print (query)
-        cur.execute(query)
-        # VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD VERY BAD
-
-        data = cur.fetchall()
-        print (data)
-        print (lastName)
-        conn.close()
-        return render_template('Employee.html', data = data) """
-
-
 if __name__ == "__main__":
     app.run(debug=True)
     app.run(host='0.0.0.0', port=5000)
