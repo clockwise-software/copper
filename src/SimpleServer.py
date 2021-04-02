@@ -48,26 +48,30 @@ def surnameSearch():
         return render_template('EmployeeSearch.html')
     if request.method == 'POST':
         try:
-            # rem: args for get form for post
-            # Get city data from search page
-            city = request.form.get('City', default="Error")
-            # Get state/province data from search page
-            state_prov = request.form.get('State/Province', default="Error")
-            # Get skill data from search page
-            skill = request.form.get('Skill', default="Error")
-            # Get license data from search page
-            licenses = request.form.get('Registered Licenses', default="Error")
-
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
-            # USE 1 SQL TO SEARCH ALL FIELDS TO RETURN 1 TABLE
-            # THANK YOU SHAYA WOLF FOR YOUR HELP BUILDING THIS CRAZY STRING
-            sql_string = f"SELECT * FROM 'EmployeeList' WHERE `City` LIKE '{city if city != '' else '%'}' AND `State/Province` LIKE '{state_prov if state_prov != '' else '%'}' AND `Skill` LIKE '{skill if skill != '' else '%'}' AND `Registered Licenses` LIKE '{licenses if licenses != '' else '%'}'"
-            # print(sql_string) # Can print this string to the terminal. Useful to copy/paste as a search query here in Gitpot
-            cur.execute(sql_string)
+
+            # Build the SQL query dynamically based on what input values are provided
+            sql_string_prefix = "SELECT * FROM EmployeeList WHERE "
+            where_sub_filters = []
+
+            # Extend the possible filterable entry types by adding the this list
+            for filter_str in ["City", "State/Province", "Skill", "Registered Licenses"]:
+                form_data = request.form.get(filter_str, default="")
+
+                # Only add the section of the string to the query if it isn't empty
+                if (form_data != ""):
+                    sql_string_prefix += "\"" + filter_str + "\"" + " LIKE ? AND "
+                    where_sub_filters.append(form_data + "%")
+
+            # Remove trailing "AND" and postfix semicolon to close query.
+            # Add further options before the ; and after the slice
+            sql_string_prefix = sql_string_prefix[:-4] + ";"
+
+            cur.execute(sql_string_prefix, tuple(where_sub_filters))
             data = cur.fetchall()
         except:
-            print('there was an error', data)
+            print("Something went wrong with the /Employee/Search Endpoint")
             conn.close()
         finally:
             conn.close()
