@@ -2,18 +2,53 @@
 
 
 {%block mainBlock%}
+
+<style>
+    form {
+        width: 100%;
+        text-align: center;
+    }
+    h2 {
+        border-style: solid;
+        border-color: transparent;
+        border-bottom-color: rgb(109, 134, 23);
+        width: 350px;
+        text-align: right;
+        color:white;
+    }
+    label {
+        display: inline-block;
+        width: 150px;
+        text-align: right;
+        color:white;
+    }
+    button {
+        float:center;
+    }
+   
+
+</style>
+
 <h2>Add Employee Data</h2>
 
 <form id='myForm' onsubmit="return loadName()">
-  <label>Email:<input type ="text" name = "email"><br></label> <!-- Added email box. -->
-  <label>First Name:<input type = "text" name = "firstName"><br></label>
-  <label>Last Name:<input type = "text" name = "lastName"><br></label>
-  <label>Business Unit:<input type = "text" name = "bu"><br></label>
-  <label>State:<input type = "text" name = "state"><br></label>
-  <label>City:<input type = "text" name = "city"><br></label> <!-- Added city box. -->
-  <label>Registered Licenses:<input type = "text" name = "rl"><br></label> <!-- Added registered license box. -->
+  <br><br><br>
+  <label>Email:</label> <!-- Added email box. -->
+  <input type ="text" name = "email"><br><br>
+  <label>First Name:</label>
+  <input type = "text" name = "firstName"><br><br>
+  <label>Last Name:</label>
+  <input type = "text" name = "lastName"><br><br>
+  <label>Business Unit:<br></label>
+  <input type = "text" name = "bu"><br><br>
+  <label>State:<br></label>
+  <input type = "text" name = "state"><br><br>
+  <label>City:<br></label> <!-- Added city box. -->
+  <input type = "text" name = "city"><br><br>
+  <label>Registered Licenses:</label> <!-- Added registered license box. -->
+  <input type = "text" name = "rl"><br><br>
   
-  <button type = "submit"> submit </button>
+  <button type = "submit"> Add Employee </button>
 </form>
 <span id='txt'></span>
 
