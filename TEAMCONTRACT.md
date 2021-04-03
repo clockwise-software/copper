@@ -51,5 +51,7 @@ This document stands in addition to the [team code of conduct](https://www.dropb
 - If you finish your personal tasks and have free time, offer your help to other teammates
 - Keep an issue associated with every pull request
 
+## Presentation
+https://docs.google.com/presentation/d/1inshOxt3hreXKpNtSx1COAvQFKj-8rMhPiw-RQxWMjI/edit?usp=sharing
 
 *This is a living document and may happily be ammended or revised by group consensus.*
