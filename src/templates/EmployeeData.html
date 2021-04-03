@@ -26,7 +26,7 @@
     var state = document.forms["myForm"]["state"].value;
     var city = document.forms["myForm"]["city"].value; // Edited here
     var rl = document.forms["myForm"]["rl"].value; // And here
-    params = 'email'+email'&firstName='+firstName+'&lastName='+lastName+'&bu='+businessunit+'&state='+state'&city'+city'&rl'+rl; // Added email, city and registered licenses.
+    params = 'email'+email+'&firstName='+firstName+'&lastName='+lastName+'&bu='+businessunit+'&state='+state'&city'+city'&rl'+rl; // Added email, city and registered licenses.
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", '/Employee/AddEmployee', true); // true is asynchronous
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
