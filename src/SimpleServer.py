@@ -44,8 +44,8 @@ def studentAddDetails():
 		try:
 			conn = sqlite3.connect(DATABASE)
 			cur = conn.cursor()
-			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'State/Province', 'City', 'Registered Licenses')\
-						VALUES (?,?,?,?,?,?,?)",(email, firstName, lastName, businessunit, state, city, rl ) ) # Updated variables to include email city and rl.
+			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'City', 'State/Province', 'Registered Licenses', 'Email')\
+						VALUES (?,?,?,?,?,?,?)",(firstName, lastName, businessunit, city, state, rl, email) ) # Updated variables to include email city and rl.
 
 			conn.commit()
 			msg = "Record successfully added"
@@ -55,29 +55,37 @@ def studentAddDetails():
 		finally:
 			conn.close()
 			return msg
-@app.route("/Employee/Edit", methods = ['GET','UPDATE']) # Added employee edit function.
+
+@app.route("/Employee/Edit", methods = ['GET','PUT']) # Added employee edit function.
 def studentEditDetails():
     if request.method =='GET':
         return render_template('EmployeeEdit.html') # Added EmployeeEdit.html
-    if request.method =='UPDATE':
+    if request.method =='PUT':
         try:
             email = request.form.get('email', default='Error')
-            newFirstName = request.form.get('firstName', default="Error") 
-            newLastName = request.form.get('lastName', default="Error")
-            newBusinessunit = request.form.get('bu', default="Error")
-            newState = request.form.get('state', default="Error")
-            newCity = request.form.get('city', default="Error")
-            newRl = request.form.get('rl', default="Error")
+            firstName = request.form.get('firstName', default="Error") 
+            lastName = request.form.get('lastName', default="Error")
+            bu = request.form.get('bu', default="Error")
+            state = request.form.get('state', default="Error")
+            city = request.form.get('city', default="Error")
+            rl = request.form.get('rl', default="Error")
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
-            cur.execute("UPDATE 'EmployeeList' SET firstName = newFirstName, lastName = newLastName, buisinessunit = newBuisinessunit, state = newState, city = newCity, rl = newRl WHERE email=?", [email])
-            print("Inserting employee update for:"+newFirstName)
-        except:
+            cur.execute("UPDATE EmployeeList SET FirstName = ?, LastName = ?,\
+                 `Business Unit` = ?, `State/Province` = ?, City = ?,\
+                 `Registered Licenses` = ? WHERE Email=?", 
+                 (firstName, lastName, bu, state, city, rl, email))
+            print("Inserting employee update for: "+firstName)
+            conn.commit()
+            msg = "Edited information for " +email
+        except Exception as e:
             conn.rollback()
+            print(e)
             msg = "error in update operation"
         finally:
             conn.close()
         return msg
+
 @app.route("/Employee/Delete", methods = ['GET','DELETE'])
 def studentDeleteDetails():
     if request.method == 'GET':
@@ -85,12 +93,16 @@ def studentDeleteDetails():
     if request.method =='DELETE':
         try:
             email = request.form.get('email', default='Error')
+            print('Email: ', email)
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
-            cur.execute("DELETE FROM 'EmployeeList' WHERE email=?", [email])
+            cur.execute("DELETE FROM EmployeeList WHERE Email=?", (email,))
+            msg = 'Deleted Data For: ' + email
             print("Deleting employee data for:"+email)
-        except:
+            conn.commit()
+        except Exception as e:
             conn.rollback()
+            print(e)
             msg = "error in delete operation"
         finally:
             conn.close()

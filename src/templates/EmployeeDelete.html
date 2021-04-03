@@ -23,8 +23,6 @@
  
 </style>
 
-
-
 <h2>Delete Employee Data</h2>
 
 <form id='myForm' onsubmit="return loadName()">
@@ -38,7 +36,7 @@
 <script>
   function loadName() {
     var email = document.forms["myForm"]["email"].value;
-    params = 'email'+email; // Delete by email.
+    params = 'email='+email; // Delete by email.
     var xhttp = new XMLHttpRequest();
     xhttp.open("DELETE", '/Employee/Delete', true); // true is asynchronous
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
