@@ -2,12 +2,37 @@
 
 
 {%block mainBlock%}
-<h2>Delete Employee Data</h2> Currently Disabled On Backend
+
+<style>
+    form{
+        width: 100%;
+        text-align: center;
+    }
+
+    h2 {
+        border-style: solid;
+        border-color: transparent;
+        border-bottom-color: rgb(109, 134, 23);
+        width: 350px;
+        text-align: right;
+        color:white;
+    }
+    label {
+        color:white;
+    }
+ 
+</style>
+
+
+
+<h2>Delete Employee Data</h2>
 
 <form id='myForm' onsubmit="return loadName()">
-  <label>Email:<input type ="text" name = "email"><br></label> <!-- Type in email to delete row. -->
-  <button type = "submit"> Delete </button>
+  <br><br><br><br><br>
+  <label>Email:<input type ="text" name = "email"><br></label><br><br> <!-- Type in email to delete row. -->
+  <button type = "submit"> Delete Employee </button>
 </form>
+<br><br><br><br>
 <span id='txt'></span>
 
 <script>
