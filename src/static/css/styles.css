@@ -1,3 +1,30 @@
 .column {
     border: 2px blue solid;
 }
+
+body {
+    background-image: url(/static/img/three.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: top;
+    margin: -10px;
+    
+}
+
+h1{
+    width: 100%;
+    text-align: center;
+}
+
+.jumbotron {
+    background-image: url(/static/img/Trihydro_Logo_Horizontal.png);
+    background-repeat: no-repeat;
+    background-size: 340px;
+    background-position: left;
+    background-color: rgb(240, 240, 240);
+}
+
+footer{
+    margin: 350px;
+    background-color: rgb(181, 73, 37);
+}
