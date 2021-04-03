@@ -23,20 +23,28 @@ This document stands in addition to the [team code of conduct](https://www.dropb
 - Present features and progress in weekly Saturday meetings
 - Update relevant issues as you perform work
 
-### Drew:
-- Backend (Python, SQL)
+### Backend:
+- Drew
+- Marcus
 
-### Isaac:
-- Frontend
+### Frontend:
+- John
+- Isaac
 
-### Marc:
-- Backend
+### Freelance:
+- Andey
 
 ### Andey:
 - Wherever (inc. SQL)
 
-### John:
-- Frontend
+### TASKS 
+- Polish frontend
+- Mobile users
+- Add position-based search
+- Add filtering after search
+- Some we should do if we can:
+- Exporting to CSV
+- Security
 
 ## Member Evaluation
 
