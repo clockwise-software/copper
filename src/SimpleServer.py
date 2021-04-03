@@ -25,7 +25,7 @@ def add_header(r):
 
 @app.route("/")
 def basic():
-    return render_template('Employee.html')
+    return render_template('EmployeeSearch.html')
 
 
 @app.route("/Employee/AddEmployee", methods=['POST', 'GET'])
