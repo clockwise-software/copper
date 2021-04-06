@@ -40,19 +40,20 @@ def studentAddDetails():
 		state = request.form.get('state', default="Error")
 		city = request.form.get('city', default="Error") # Added city request.
 		rl = request.form.get('rl', default="Error") # Added registered license request.
-		print("inserting employee"+firstName)
-		try:
+        skill = request.form.get('skill', default="Error")
+        print("inserting employee"+firstName)
+        try:
 			conn = sqlite3.connect(DATABASE)
 			cur = conn.cursor()
-			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'City', 'State/Province', 'Registered Licenses', 'Email')\
-						VALUES (?,?,?,?,?,?,?)",(firstName, lastName, businessunit, city, state, rl, email) ) # Updated variables to include email city and rl.
+			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'City', 'State/Province', 'Registered Licenses', 'Email','Skill')\
+						VALUES (?,?,?,?,?,?,?,?)",(firstName, lastName, businessunit, city, state, rl, email, skill) ) # Updated variables to include email city and rl.
 
 			conn.commit()
-			msg = "Record successfully added"
-		except:
+			msg = "Record successfully added!"
+        except:
 			conn.rollback()
-			msg = "error in insert operation"
-		finally:
+			msg = "Error in insert operation."
+        finally:
 			conn.close()
 			return msg
 
@@ -69,19 +70,20 @@ def studentEditDetails():
             state = request.form.get('state', default="Error")
             city = request.form.get('city', default="Error")
             rl = request.form.get('rl', default="Error")
+            skill = request.form.get('skill', default='Error')
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
             cur.execute("UPDATE EmployeeList SET FirstName = ?, LastName = ?,\
                  `Business Unit` = ?, `State/Province` = ?, City = ?,\
-                 `Registered Licenses` = ? WHERE Email=?", 
-                 (firstName, lastName, bu, state, city, rl, email))
+                 `Registered Licenses` = ?, Skill = ? WHERE Email=?", 
+                 (firstName, lastName, bu, state, city, rl, email, skill))
             print("Inserting employee update for: "+firstName)
             conn.commit()
-            msg = "Edited information for " +email
+            msg = "Edited information for: " +email
         except Exception as e:
             conn.rollback()
             print(e)
-            msg = "error in update operation"
+            msg = "Error in update operation."
         finally:
             conn.close()
         return msg
@@ -97,13 +99,12 @@ def studentDeleteDetails():
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
             cur.execute("DELETE FROM EmployeeList WHERE Email=?", (email,))
-            msg = 'Deleted Data For: ' + email
-            print("Deleting employee data for:"+email)
+            msg = 'Deleted data For: ' + email
             conn.commit()
         except Exception as e:
             conn.rollback()
             print(e)
-            msg = "error in delete operation"
+            msg = "Error in delete operation."
         finally:
             conn.close()
         return msg
