@@ -30,32 +30,31 @@ def basic():
 
 @app.route("/Employee/AddEmployee", methods=['POST', 'GET'])
 def studentAddDetails():
-	if request.method =='GET':
-		return render_template('EmployeeData.html')
-	if request.method =='POST':
-		email = request.form.get('email', default='Error') # Added email request.
-		firstName = request.form.get('firstName', default="Error") 
-		lastName = request.form.get('lastName', default="Error")
-		businessunit = request.form.get('bu', default="Error")
-		state = request.form.get('state', default="Error")
-		city = request.form.get('city', default="Error") # Added city request.
-		rl = request.form.get('rl', default="Error") # Added registered license request.
+    if request.method =='GET':
+        return render_template('EmployeeData.html')
+    if request.method =='POST':
+        email = request.form.get('email', default='Error') # Added email request.
+        firstName = request.form.get('firstName', default="Error") 
+        lastName = request.form.get('lastName', default="Error")
+        businessunit = request.form.get('bu', default="Error")
+        state = request.form.get('state', default="Error")
+        city = request.form.get('city', default="Error") # Added city request.
+        rl = request.form.get('rl', default="Error") # Added registered license request.
         skill = request.form.get('skill', default="Error")
         print("inserting employee"+firstName)
         try:
-			conn = sqlite3.connect(DATABASE)
-			cur = conn.cursor()
-			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'City', 'State/Province', 'Registered Licenses', 'Email','Skill')\
+            conn = sqlite3.connect(DATABASE)
+            cur = conn.cursor()
+            cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'City', 'State/Province', 'Registered Licenses', 'Email','Skill')\
 						VALUES (?,?,?,?,?,?,?,?)",(firstName, lastName, businessunit, city, state, rl, email, skill) ) # Updated variables to include email city and rl.
-
-			conn.commit()
-			msg = "Record successfully added!"
+            conn.commit()
+            msg = "Record successfully added!"
         except:
-			conn.rollback()
-			msg = "Error in insert operation."
+            conn.rollback()
+            msg = "Error in insert operation."
         finally:
-			conn.close()
-			return msg
+            conn.close()
+    return msg
 
 @app.route("/Employee/Edit", methods = ['GET','PUT']) # Added employee edit function.
 def studentEditDetails():
