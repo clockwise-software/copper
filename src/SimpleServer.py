@@ -98,7 +98,7 @@ def studentDeleteDetails():
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
             cur.execute("DELETE FROM EmployeeList WHERE Email=?", (email,))
-            msg = 'Deleted data For: ' + email
+            msg = 'Deleted data for: ' + email
             conn.commit()
         except Exception as e:
             conn.rollback()
