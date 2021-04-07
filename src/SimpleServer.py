@@ -3,7 +3,7 @@
 # Updated by Dr. Mike Borowczak @ UWyo March 2021
 
 import os
-from flask import Flask, redirect, request, render_template, jsonify
+from flask import Flask, redirect, request, render_template, jsonify, make_response
 import sqlite3
 
 DATABASE = 'bootcamp.db'
@@ -168,6 +168,15 @@ def lastname_autocomplete():
     else:
         print('Error in lastnameAutocomplete: Invalid request method.')
 
+@app.route('/csv/')  
+def download_csv():  
+    csv = 'foo,bar,baz\nhai,bai,crai\n'  
+    response = make_response(csv)
+    cd = 'attachment; filename=mycsv.csv'
+    response.headers['Content-Disposition'] = cd 
+    response.mimetype='text/csv'
+
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True)
