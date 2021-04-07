@@ -25,7 +25,14 @@
     button {
         float:center;
     }
-   
+   #txt {
+    text-align: center;
+    margin: 10px auto;
+    width: 50%;
+    background-color: rgb(109, 134, 23);
+    border-radius: 5px;
+    color: rgb(240,240,240);
+}
 
 </style>
 
@@ -47,10 +54,12 @@
   <input type = "text" name = "city"><br><br>
   <label>Registered Licenses:</label>
   <input type = "text" name = "rl"><br><br>
+  <label>Skill:</label>
+  <input type = "text" name = "skill"><br><br>
   
   <button type = "submit"> submit </button>
 </form>
-<span id='txt'></span>
+<div id='txt'></div>
 
 <script>
   function loadName() {
@@ -61,7 +70,8 @@
     var state = document.forms["myForm"]["state"].value;
     var city = document.forms["myForm"]["city"].value;
     var rl = document.forms["myForm"]["rl"].value;
-    params = 'email='+email+'&firstName='+firstName+'&lastName='+lastName+'&bu='+businessunit+'&state='+state+'&city='+city+'&rl='+rl;
+    var skill = document.forms["myForm"]["skill"].value;
+    params = 'email='+email+'&firstName='+firstName+'&lastName='+lastName+'&bu='+businessunit+'&state='+state+'&city='+city+'&rl='+rl+'&skill='+skill;
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", '/Employee/Edit', true); // true is asynchronous
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
