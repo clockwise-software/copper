@@ -2,13 +2,12 @@
 
 
 {%block mainBlock%}
-
 <style>
     table {
-        border-color: black;
+        background-color: white;
         border-width: 2px;
         width: 50%;
-        color:white;
+        color:black;
         margin-left:auto;margin-right:auto;
     }
 
@@ -24,7 +23,7 @@
 </style>
 <h2>Employees</h2>
 
-<table border = 1>
+<table class = "table table-striped">
    <thead>
       <td>First Name</td>
       <td>Last Name</td>
@@ -33,6 +32,7 @@
       <td>Skill</td>
       <td>License</td>
       <td>Business Unit</td>
+      <td>Email</td>
    </thead>
 
    {% for row in data %}
@@ -46,6 +46,7 @@
         <td>{{row[9]}}</td>
         <td>{{row[8]}}</td>
         <td>{{row[3]}}</td>
+        <td>{{row[11]}}</td>
       </tr>
    {% endfor %}
 </table>
