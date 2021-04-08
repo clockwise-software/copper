@@ -12,6 +12,12 @@
         margin-left:auto;margin-right:auto;
     }
 
+    button {
+        background-color: white;
+        color: black;
+        text-align: center;
+    }
+
     h2 {
         border-style: solid;
         border-color: transparent;
@@ -22,9 +28,9 @@
     }
 
 </style>
-<h2>Employees</h2>
-
-<table class = "table table-striped">
+<h2>Search Results</h2>
+<button id="#csv" class="btn">Export to CSV</button>
+<table class = "table table-striped" id = "Employee">
    <thead>
      <tr>
       <th>First Name</th>
@@ -56,9 +62,12 @@
 </table>
 <script>
   jQuery(document).ready(function($){
-    console.log("Executed Code");
     $('table').excelTableFilter();
     $('.glyphicon').removeClass('glyphicon-arrow-down');
+    $('#csv').on('click',function(){
+      console.log("button clicked");
+    //$("#example").tableHTMLExport({type:'csv',filename:'sample.csv'});
+  })
   });
 </script>
 
