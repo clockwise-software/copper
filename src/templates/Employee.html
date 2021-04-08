@@ -29,8 +29,9 @@
 
 </style>
 <h2>Search Results</h2>
-<button id="#csv" class="btn">Export to CSV</button>
-<table class = "table table-striped" id = "Employee">
+<button id="csv" class="btn" onclick="exportCSV()">Export to CSV</button>
+<button id="txt" class="btn" onclick="exportTXT()">Export to TXT</button>
+<table class = "table table-striped" id = "table">
    <thead>
      <tr>
       <th>First Name</th>
@@ -64,12 +65,19 @@
   jQuery(document).ready(function($){
     $('table').excelTableFilter();
     $('.glyphicon').removeClass('glyphicon-arrow-down');
-    $('#csv').on('click',function(){
-      console.log("button clicked");
-    //$("#example").tableHTMLExport({type:'csv',filename:'sample.csv'});
-  })
   });
+  function exportCSV() {
+    $("table").tableHTMLExport({
+      type:'csv',
+      filename:'SearchResults.csv',
+    });
+  }
+  function exportTXT() {
+    $("table").tableHTMLExport({
+      type:'txt',
+      filename:'SearchResults.txt',
+    });
+  }
 </script>
-
 
 {%endblock%}
