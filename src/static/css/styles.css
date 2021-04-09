@@ -3,11 +3,7 @@
 }
 
 body {
-    background-image: url(/static/img/three.png);
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position: top;
-    margin: -10px;
+    background-image: linear-gradient(#000000, #656565);
 }
 
 h1{
@@ -16,11 +12,7 @@ h1{
 }
 
 .jumbotron {
-    background-image: url(/static/img/Trihydro_Logo_Horizontal.png);
-    background-repeat: no-repeat;
-    background-size: 340px;
-    background-position: left;
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(240,240,240);
 }
 
 footer{
