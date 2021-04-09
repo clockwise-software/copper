@@ -9,33 +9,65 @@
         text-align: center;
     }
     h2 {
+        margin: 20px;
         border-style: solid;
         border-color: transparent;
         border-bottom-color: rgb(109, 134, 23);
-        width: 350px;
         text-align: right;
         color:white;
+        font-weight: bolder;
+        font-size: 1.75vw;
     }
     label {
         display: inline-block;
-        width: 150px;
-        text-align: right;
+        width: 35%;
+        height: 100%;
+        text-align: center;
         color:white;
+    }
+    input {
+        width: 40%;
     }
     button {
         float:center;
     }
+    .card {
+        
+        padding: 50px;
+        margin: auto;
+        text-align:center;
+        background-color:rgb(138, 31, 3);
+        box-shadow: 0 10px 30px 0 #00000033;
+        width: 45%;
+        border-radius: 30px;
+        min-width: 100px;
+    }
+    .card-style .card {
+        margin:30px;
+        padding: 2px;
+        width: 20%;
+    }
+    
    
 
 </style>
 
 <!-- Do we need to process  with ajax?-->
 <!-- not really it is a get and redirecting to a table page is not a bad plan -->
-<h2>Find Employees</h2>
+<section>
+    <div class= "card-style">
+        <div class="card" style="width: retlitive">
+            <h2>Find Employees</h2>
+        </div>
+    </div>
+</section>
+
+
 <!-- <form id='myForm' action='/Student/InjectionSearch' method = 'post'> -->
 <form id='myForm' action='/Employee/Search' method = 'post'>
-    <div>
-        <br><br>
+    <div class="card">
+        <label>Search Distance:</label>
+        <input type = "text" name = "distance"><br><br>
         <label>City:</label>
         <input type = "text" name = "City"><br><br>                         <!-- Changed to City -->
         <label>State/Province:</label>
