@@ -3,7 +3,7 @@
 # Updated by Dr. Mike Borowczak @ UWyo March 2021
 
 import os
-from flask import Flask, redirect, request, render_template, jsonify
+from flask import Flask, redirect, request, render_template, jsonify, make_response
 import sqlite3
 
 DATABASE = 'bootcamp.db'
@@ -108,32 +108,6 @@ def studentDeleteDetails():
             conn.close()
         return msg
 
-#@app.route("/Employee/Search", methods = ['GET','POST'])
-# def studentSearch():
-#     if request.method == 'GET':
-#         return render_template('EmployeeData.html')
-#     if request.method == 'POST':
-#         firstName = request.form.get('firstName', default="Error")
-#         lastName = request.form.get('lastName', default="Error")
-#         businessunit = request.form.get('bu', default="Error")
-#         state = request.form.get('state', default="Error")
-#         print("inserting employee"+firstName)
-#         try:
-#             conn = sqlite3.connect(DATABASE)
-#             cur = conn.cursor()
-#             cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'State/Province')\
-#                         VALUES (?,?,?,?)", (firstName, lastName, businessunit, state))
-
-#             conn.commit()
-#             msg = "Record successfully added"
-#         except:
-#             conn.rollback()
-#             msg = "error in insert operation"
-#         finally:
-#             conn.close()
-#             return msg
-
-
 @app.route("/Employee/Search", methods=['GET', 'POST'])
 def surnameSearch():
     if request.method == 'GET':
@@ -193,7 +167,6 @@ def lastname_autocomplete():
             return jsonify(data)
     else:
         print('Error in lastnameAutocomplete: Invalid request method.')
-
 
 if __name__ == "__main__":
     app.run(debug=True)

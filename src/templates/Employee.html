@@ -5,11 +5,17 @@
 
 <style>
     table {
-        border-color: black;
+        background-color: white;
         border-width: 2px;
         width: 50%;
-        color:white;
+        color:black;
         margin-left:auto;margin-right:auto;
+    }
+
+    button {
+        background-color: white;
+        color: black;
+        text-align: center;
     }
 
     h2 {
@@ -22,33 +28,58 @@
     }
 
 </style>
-<h2>Employees</h2>
-
-<table border = 1>
+<h2>Search Results</h2>
+<button id="csv" class="btn" onclick="exportCSV()">Export to CSV</button>
+<button id="txt" class="btn" onclick="exportTXT()">Export to TXT</button>
+<table class = "table table-responsive" id = "table">
    <thead>
-      <td>First Name</td>
-      <td>Last Name</td>
-      <td>City</td>
-      <td>State</td>
-      <td>Skill</td>
-      <td>License</td>
-      <td>Business Unit</td>
+     <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Skill</th>
+      <th>License</th>
+      <th>Job Title</th>
+      <th>Business Unit</th>
+      <th>Email</th>
+      </tr>
    </thead>
-
+   <tbody>
    {% for row in data %}
    <!-- A List of tuples so row is each item in the list
         and then the index is the column number.-->
-      <tr>
+      <tr id={{row[11]}}>
         <td>{{row[0]}}</td>
         <td>{{row[1]}}</td>
         <td>{{row[4]}}</td>
         <td>{{row[5]}}</td>
         <td>{{row[9]}}</td>
         <td>{{row[8]}}</td>
+        <td>{{row[6]}}</td>
         <td>{{row[3]}}</td>
+        <td>{{row[11]}}</td>
       </tr>
    {% endfor %}
+  </tbody>
 </table>
-
+<script>
+  jQuery(document).ready(function($){
+    $('table').excelTableFilter();
+    $('.glyphicon').removeClass('glyphicon-arrow-down');
+  });
+  function exportCSV() {
+    $("table").tableHTMLExport({
+      type:'csv',
+      filename:'SearchResults.csv'
+    });
+  }
+  function exportTXT() {
+    $("table").tableHTMLExport({
+      type:'txt',
+      filename:'SearchResults.txt'
+    });
+  }
+</script>
 
 {%endblock%}
