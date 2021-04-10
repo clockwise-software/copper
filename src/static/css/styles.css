@@ -93,16 +93,18 @@ header {
 /* style for lables for inputs */
 label {
     display: inline-block;
-    width: 20%;
-    height: 100%;
+    font-size: 1vmax;
     text-align: right;
     color:white;
     font-family:Georgia;
+    width: 30%;
 }
 
 /* text input styling */
 input {
         width: 35%;
+        height: 1.3vmax;
+        font-size: 1vmax;
     }
 
 /* footer styling */
