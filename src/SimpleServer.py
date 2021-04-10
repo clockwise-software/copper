@@ -47,7 +47,7 @@ def studentAddDetails():
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
             cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'City', 'State/Province', 'Registered Licenses', 'Email','Skill')\
-						VALUES (?,?,?,?,?,?,?,?)",(firstName, lastName, businessunit, city, state, rl, email, skill) ) # Updated variables to include email city and rl.
+						VALUES (?,?,?,?,?,?,?,?)",(firstName, lastName, businessunit, city, state, rl, skill, email) ) # Updated variables to include email city and rl.
             conn.commit()
             msg = "Record successfully added!"
         except:
