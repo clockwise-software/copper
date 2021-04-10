@@ -3,6 +3,7 @@
 # Updated by Dr. Mike Borowczak @ UWyo March 2021
 
 import os
+import math
 from flask import Flask, redirect, request, render_template, jsonify, make_response
 import sqlite3
 
@@ -118,7 +119,9 @@ def surnameSearch():
             cur = conn.cursor()
 
             # Build the SQL query dynamically based on what input values are provided
-            sql_string_prefix = "SELECT * FROM EmployeeList WHERE "
+            sql_string_prefix = "select a.*, b.lat, b.lng from EmployeeList as a "
+            sql_string_prefix += "left join cities as b on b.city=a.city and b.stateName=a.`State/Province`"
+            sql_string_prefix += " WHERE "
             where_sub_filters = []
 
             # Extend the possible filterable entry types by adding the this list
@@ -127,7 +130,7 @@ def surnameSearch():
 
                 # Only add the section of the string to the query if it isn't empty
                 if (form_data != ""):
-                    sql_string_prefix += "\"" + filter_str + "\"" + " LIKE ? AND "
+                    sql_string_prefix += "a.\"" + filter_str + "\"" + " LIKE ? AND "
                     where_sub_filters.append(form_data + "%")
 
             # Remove trailing "AND" and postfix semicolon to close query.
@@ -136,6 +139,30 @@ def surnameSearch():
 
             cur.execute(sql_string_prefix, tuple(where_sub_filters))
             data = cur.fetchall()
+
+            # if distance filter is required, then compute distance via python
+            city = request.form.get('City', default='')
+            state = request.form.get('State/Province', default='')
+            distance = int(request.form.get('distance', default=0))
+
+            # if they send all 3 of the above, calculate distance from there to employees data
+            if city != '' and state != '' and distance > 0:
+                sql = "Select lat, lng from cities where city=? and statename=?"
+                cur.execute(sql, [city, state])
+                data2 = cur.fetchall()
+                lat1 = data2[0][0] 
+                lng1 = data2[0][1]
+                final_data = []
+                for item in data2:
+                    lat2 = item[-2]
+                    lng2 = item[-1]
+                    distance2 = math.sqrt((3958.8 * abs(math.radians(lat1)-math.radians(lat2)) ) ** 2 + ( 3958.8 * math.cos(math.radians(lat1)) * abs(math.radians(lng1)-math.radians(lng2)) ) ** 2 )
+                    print(distance2)
+                    if distance2 <= distance:
+                        final_data.append(item)
+                data = final_data
+                print(data)
+
         except:
             print("Something went wrong with the /Employee/Search Endpoint")
             conn.close()
