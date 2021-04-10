@@ -121,32 +121,52 @@ def surnameSearch():
             # Build the SQL query dynamically based on what input values are provided
             sql_string_prefix = "select a.*, b.lat, b.lng from EmployeeList as a "
             sql_string_prefix += "left join cities as b on b.city=a.city and b.stateName=a.`State/Province`"
-            sql_string_prefix += " WHERE "
+            #sql_string_prefix += " WHERE "
             where_sub_filters = []
 
+            city = request.form.get('City', default='').capitalize()
+            state = request.form.get('State/Province', default='').capitalize()
+            distance = request.form.get('distance')
+            if distance == '':
+                distance = 0
+            else:
+                distance = int(distance)
             # Extend the possible filterable entry types by adding the this list
+            has_parameters = False
             for filter_str in ["City", "State/Province", "Skill", "Registered Licenses"]:
-                form_data = request.form.get(filter_str, default="")
+                form_data = request.form.get(filter_str, default="").capitalize()
+                if city != '' and state != '' and distance > 0:
+                    if filter_str == "City" or filter_str == "State/Province":
+                        continue
 
                 # Only add the section of the string to the query if it isn't empty
                 if (form_data != ""):
+                    if has_parameters == False:
+                        sql_string_prefix += " WHERE "
+                        has_parameters = True
                     sql_string_prefix += "a.\"" + filter_str + "\"" + " LIKE ? AND "
                     where_sub_filters.append(form_data + "%")
 
             # Remove trailing "AND" and postfix semicolon to close query.
             # Add further options before the ; and after the slice
-            sql_string_prefix = sql_string_prefix[:-4] + ";"
+            if has_parameters == True:
+                sql_string_prefix = sql_string_prefix[:-4] + ";"
 
+            print(sql_string_prefix, tuple(where_sub_filters))
             cur.execute(sql_string_prefix, tuple(where_sub_filters))
             data = cur.fetchall()
+            print('data=', data)
 
             # if distance filter is required, then compute distance via python
-            city = request.form.get('City', default='')
-            print(city)
-            state = request.form.get('State/Province', default='')
-            print(state)
-            distance = int(request.form.get('distance', default=0))
-            print(distance)
+            #city = request.form.get('City', default='')
+            #print(city)
+            #state = request.form.get('State/Province', default='')
+            #print(state)
+            #if distance == '':
+            #    distance = 0
+            #else:
+            #    distance = int(distance)
+            #print(distance)
 
             # if they send all 3 of the above, calculate distance from there to employees data
             if city != '' and state != '' and distance > 0:
@@ -164,15 +184,18 @@ def surnameSearch():
                 for item in data:
                     lat2 = item[-2]
                     lng2 = item[-1]
+                    if lat2 == None or lng2 == None:
+                        continue
                     print("lat/lng: ", lat2, lng2)
                     distance2 = math.sqrt((3958.8 * abs(math.radians(lat1)-math.radians(lat2)) ) ** 2 + ( 3958.8 * math.cos(math.radians(lat1)) * abs(math.radians(lng1)-math.radians(lng2)) ) ** 2 )
+
                     print('Distance: ', distance2)
                     if distance2 <= distance:
                         final_data.append(item)
                 data = final_data
 
-        except:
-            print("Something went wrong with the /Employee/Search Endpoint")
+        except Exception as e:
+            print("Something went wrong with the /Employee/Search Endpoint: ", e)
             conn.close()
         finally:
             conn.close()
