@@ -168,16 +168,6 @@ def lastname_autocomplete():
     else:
         print('Error in lastnameAutocomplete: Invalid request method.')
 
-@app.route('/csv/')  
-def download_csv():  
-    csv = 'foo,bar,baz\nhai,bai,crai\n'  
-    response = make_response(csv)
-    cd = 'attachment; filename=mycsv.csv'
-    response.headers['Content-Disposition'] = cd 
-    response.mimetype='text/csv'
-
-    return response
-
 if __name__ == "__main__":
     app.run(debug=True)
     app.run(host='0.0.0.0', port=5000)
