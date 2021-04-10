@@ -142,26 +142,34 @@ def surnameSearch():
 
             # if distance filter is required, then compute distance via python
             city = request.form.get('City', default='')
+            print(city)
             state = request.form.get('State/Province', default='')
+            print(state)
             distance = int(request.form.get('distance', default=0))
+            print(distance)
 
             # if they send all 3 of the above, calculate distance from there to employees data
             if city != '' and state != '' and distance > 0:
                 sql = "Select lat, lng from cities where city=? and statename=?"
                 cur.execute(sql, [city, state])
                 data2 = cur.fetchall()
-                lat1 = data2[0][0] 
+                print(data2)
+                lat1 = data2[0][0]
                 lng1 = data2[0][1]
                 final_data = []
-                for item in data2:
+                # This is querying 'data' which apparently only holds records
+                # that match the city/state entered. We want to look beyond those
+                # by 'distance' miles. seems we would have to query each item in 
+                # the 'cities' table but we were hoping to avoid that.
+                for item in data:
                     lat2 = item[-2]
                     lng2 = item[-1]
+                    print("lat/lng: ", lat2, lng2)
                     distance2 = math.sqrt((3958.8 * abs(math.radians(lat1)-math.radians(lat2)) ) ** 2 + ( 3958.8 * math.cos(math.radians(lat1)) * abs(math.radians(lng1)-math.radians(lng2)) ) ** 2 )
-                    print(distance2)
+                    print('Distance: ', distance2)
                     if distance2 <= distance:
                         final_data.append(item)
                 data = final_data
-                print(data)
 
         except:
             print("Something went wrong with the /Employee/Search Endpoint")
