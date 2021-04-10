@@ -1,6 +1,21 @@
 # base-environment
 
-This is the base environment for the CLOCKWISE 2021 Software Engineering Bootcamp!
+This is the product of team Copper's work for the CLOCKWISE 2021 Software Engineering Bootcamp! It was developed cooperatively over a two week period.
+
+## Team
+
+- [Andey Robins](@andey-robins)
+- [Drew Beardall](@SleepyAnton)
+- [Isaac Bullinger](@isaacBullinger)
+- [John Schoenwolf](@johnschoenwolf)
+- [Marc Wodahl](@mwodahl)
+
+## Running
+
+To run the project outside of the Gitpod environment:
+1. Clone this repo
+2. In the root, run `pip install -r src/requirements.txt && python src/SimpleServer.py`
+3. The application will be running at [localhost:5000/](http://localhost:5000/)
 
 ## About CLOCKWISE SE Bootcamp
 
