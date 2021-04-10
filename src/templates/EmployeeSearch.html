@@ -8,6 +8,7 @@
         width: 100%;
         text-align: center;
     }
+    
     h2 {
         margin: 20px;
         border-style: solid;
@@ -18,50 +19,30 @@
         font-weight: bolder;
         font-size: 1.75vw;
     }
-    label {
-        display: inline-block;
-        width: 35%;
-        height: 100%;
-        text-align: center;
-        color:white;
-    }
-    input {
-        width: 40%;
-    }
+
     button {
         float:center;
     }
-    .card {
-        
-        padding: 50px;
-        margin: auto;
-        text-align:center;
-        background-color:rgb(138, 31, 3);
-        box-shadow: 0 10px 30px 0 #00000033;
-        width: 45%;
-        border-radius: 30px;
-        min-width: 100px;
-    }
-    .card-style .card {
-        margin:30px;
-        padding: 2px;
-        width: 20%;
-    }
-    
-   
 
+    #txt {
+    text-align: center;
+    margin: 10px auto;
+    width: 50%;
+    background-color: rgb(109, 134, 23);
+    border-radius: 5px;
+    color: rgb(240,240,240);
+    }
 </style>
 
 <!-- Do we need to process  with ajax?-->
 <!-- not really it is a get and redirecting to a table page is not a bad plan -->
 <section>
     <div class= "card-style">
-        <div class="card" style="width: retlitive">
-            <h2>Find Employees</h2>
+        <div class="card">
+            <h2>Search Employees</h2>
         </div>
     </div>
 </section>
-
 
 <!-- <form id='myForm' action='/Student/InjectionSearch' method = 'post'> -->
 <form id='myForm' action='/Employee/Search' method = 'post'>

@@ -3,19 +3,111 @@
 }
 
 body {
-    background-image: linear-gradient(#000000, #656565);
+    background-image: linear-gradient(#656565, white 60%);
 }
 
+/* text above navigation bar */
 h1{
     width: 100%;
     text-align: center;
 }
 
-.jumbotron {
-    background-color: rgb(240,240,240);
+/* header styling */
+header {
+    float:left;
+    display: block;
+    background-image: url(/static/img/GrandTeton.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    background-position-y: 70%;
 }
 
+/* navigation bar styling */
+.navbar  {
+    background-color: #656565;
+    clear:both;
+    border-radius: unset;
+    box-shadow: 0 0 15px #000000;    
+}
+
+/* navigation bar text styling */
+.navbar a {
+    color: black;
+    font-family: Georgia;
+    font-size: 20px;
+}
+
+/* navigation bar mouseover styling */
+.navbar li a:hover {
+    background-color:#f1f1f2;
+}
+
+/* navigation bar toggle menue styling */
+.custom-toggler {
+    border-color: black;
+    background-color:unset;
+}
+
+/* navigation bar toggle button styling */
+.icon-bar {
+    background-color: black;
+}
+
+/* style for logo top left */
+.card1 {
+    size: 40%;
+    background-color: transparent;
+}
+
+/* style for text above navigation bar */
+.card2 {
+    color: white;
+    width: 100%;
+}
+
+/* style for text above navigation bar */
+.card2 .container h1 {
+    text-shadow: 0 0 10px black;
+}
+
+/* style for red square */
+.card {
+    padding: 50px;
+    margin: auto;
+    text-align:center;
+    background-color:rgb(138, 31, 3);
+    box-shadow: 0 -8px 6px -6px #000000;
+    width: 45%;
+    border-radius: 20px;
+    min-width: 100px;
+}
+
+/* additional styles changes for red square in top left */
+.card-style .card {
+    margin:30px;
+    padding: 2px;
+    width: 20%;
+}
+
+/* style for lables for inputs */
+label {
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+    text-align: right;
+    color:white;
+    font-family:Georgia;
+}
+
+/* text input styling */
+input {
+        width: 35%;
+    }
+
+/* footer styling */
 footer{
-    margin: 350px;
-    background-color: rgb(181, 73, 37);
+    margin-top: 5%;
+    background-color: #656565;
+    text-align: center;
 }

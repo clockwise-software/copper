@@ -8,23 +8,22 @@
         width: 100%;
         text-align: center;
     }
+    
     h2 {
+        margin: 20px;
         border-style: solid;
         border-color: transparent;
         border-bottom-color: rgb(109, 134, 23);
-        width: 350px;
         text-align: right;
         color:white;
+        font-weight: bolder;
+        font-size: 1.75vw;
     }
-    label {
-        display: inline-block;
-        width: 150px;
-        text-align: right;
-        color:white;
-    }
+
     button {
         float:center;
     }
+
     #txt {
     text-align: center;
     margin: 10px auto;
@@ -33,31 +32,39 @@
     border-radius: 5px;
     color: rgb(240,240,240);
     }
-
 </style>
 
-<h2>Add Employee Data</h2>
+<section>
+    <div class = "card-style">
+        <div class = "card">
+            <h2>Add Employee Data</h2>
+        </div>
+    </div>
+</section>
+
 
 <form id='myForm' onsubmit="return loadName()">
-  <br><br><br>
-  <label>Email:</label> <!-- Added email box. -->
-  <input type ="text" name = "email"><br><br>
-  <label>First Name:</label>
-  <input type = "text" name = "firstName"><br><br>
-  <label>Last Name:</label>
-  <input type = "text" name = "lastName"><br><br>
-  <label>Business Unit:<br></label>
-  <input type = "text" name = "bu"><br><br>
-  <label>State:<br></label>
-  <input type = "text" name = "state"><br><br>
-  <label>City:<br></label> <!-- Added city box. -->
-  <input type = "text" name = "city"><br><br>
-  <label>Registered Licenses:</label> <!-- Added registered license box. -->
-  <input type = "text" name = "rl"><br><br>
-  <label>Skill:</label>
-  <input type = "text" name = "skill"><br><br>
+    <div class = "card">
+        <label>Email:</label> <!-- Added email box. -->
+        <input type ="text" name = "email"><br><br>
+        <label>First Name:</label>
+        <input type = "text" name = "firstName"><br><br>
+        <label>Last Name:</label>
+        <input type = "text" name = "lastName"><br><br>
+        <label>Business Unit:<br></label>
+        <input type = "text" name = "bu"><br><br>
+        <label>State:<br></label>
+        <input type = "text" name = "state"><br><br>
+        <label>City:<br></label> <!-- Added city box. -->
+        <input type = "text" name = "city"><br><br>
+        <label>Registered Licenses:</label> <!-- Added registered license box. -->
+        <input type = "text" name = "rl"><br><br>
+        <label>Skill:</label>
+        <input type = "text" name = "skill"><br><br>
   
-  <button type = "submit"> Add Employee </button>
+        <button type = "submit"> Add Employee </button>
+  </div>
+  
 </form>
     <div id='txt'></div>
 

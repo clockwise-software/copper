@@ -4,22 +4,26 @@
 {%block mainBlock%}
 
 <style>
-    form{
+    form {
         width: 100%;
         text-align: center;
     }
 
     h2 {
+        margin: 20px;
         border-style: solid;
         border-color: transparent;
         border-bottom-color: rgb(109, 134, 23);
-        width: 350px;
         text-align: right;
         color:white;
+        font-weight: bolder;
+        font-size: 1.75vw;
     }
-    label {
-        color:white;
+
+    button {
+        float:center;
     }
+
     #txt {
     text-align: center;
     margin: 10px auto;
@@ -30,13 +34,21 @@
     }
 </style>
 
-<h2>Delete Employee Data</h2>
+<section>
+    <div class = "card-style">
+        <div class = "card">
+            <h2>Delete Employee Data</h2>
+        </div>
+    </div>
+</section>
 
 <form id='myForm' onsubmit="return loadName()">
-  <br><br><br><br><br>
-  <label>Email:</label> <!-- Type in email to delete row. -->
-  <input type ="text" name = "email"><br><br>
-  <button type = "submit"> Delete Employee </button>
+  <div class = "card">
+        <label>Email:</label> <!-- Type in email to delete row. -->
+        <input type ="text" name = "email"><br><br>
+        <button type = "submit"> Delete Employee </button>
+  </div>
+  
 </form>
 <br><br><br><br>
 <div id='txt'></div>
